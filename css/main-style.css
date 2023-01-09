@@ -1,0 +1,26 @@
+/* Modifica il colore del testo */
+body {
+  color: blue;
+}
+
+/* Modifica il colore del background */
+body {
+  background-color: lightgray;
+}
+
+/* Modifica il font */
+body {
+  font-family: sans-serif;
+}
+
+/* Modifica il colore del link */
+a {
+  color: purple;
+}
+
+/* Layout adattivo per i dispositivi mobili */
+@media (max-width: 600px) {
+  .main-content {
+    width: 100%;
+  }
+}
