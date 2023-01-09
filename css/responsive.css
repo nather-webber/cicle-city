@@ -1,0 +1,39 @@
+/* Stili per schermi con larghezza minore o uguale a 768px */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
+  nav ul {
+    display: block;
+  }
+
+  nav ul li {
+    flex: none;
+    width: 100%;
+  }
+
+  section {
+    margin-bottom: 10px;
+  }
+}
+
+/* Stili per schermi con larghezza maggiore di 768px */
+@media (min-width: 769px) {
+  .container {
+    width: 80%;
+  }
+
+  nav ul {
+    display: flex;
+  }
+
+  nav ul li {
+    flex: 1;
+    width: auto;
+  }
+
+  section {
+    margin-bottom: 20px;
+  }
+}
