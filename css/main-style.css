@@ -1,26 +1,128 @@
-/* Modifica il colore del testo */
+/* Importa il file di stile di Bootstrap */
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
+
 body {
-  color: blue;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
 }
 
-/* Modifica il colore del background */
-body {
-  background-color: lightgray;
+h1, h2, h3 {
+  color: #333333;
 }
 
-/* Modifica il font */
-body {
-  font-family: sans-serif;
-}
-
-/* Modifica il colore del link */
 a {
-  color: purple;
+  color: #0000ff;
 }
 
-/* Layout adattivo per i dispositivi mobili */
-@media (max-width: 600px) {
-  .main-content {
-    width: 100%;
-  }
+a:hover {
+  color: #ff0000;
 }
+
+header {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+nav {
+  background-color: #eeeeee;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+nav ul li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: #dddddd;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+}
+
+section h2 {
+  margin: 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0000ff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #000080;
+}
+
+.btn:active {
+  background-color: #00ffff;
+  color: #000000;
+}
+
+footer {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.8em;
+}
+
+/* Sostituisce i margini predefiniti di Bootstrap */
+.container {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* Imposta il colore di sfondo dei pannelli di Bootstrap */
+.panel-default>.panel-heading {
+  background-color: #f8f8f8;
+  color: #000000;
+}
+
+/* Aggiunge una sottolineatura sotto i link dei pannelli di Bootstrap */
+.panel-default>.panel-heading a:hover {
+  text-decoration: underline;
+}
+
+/* Sostituisce i margini predefiniti di Bootstrap per le tabelle */
+.table {
+  margin-bottom: 0;
+}
+
