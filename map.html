@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenLayers Bike Path</title>
+    <link rel="stylesheet" href="./libs/v6.3.1-dist/ol.css" type="text/css">
+    <script src="./libs/v6.3.1-dist/ol.js"></script>
+    <style>
+      .map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      // Initialize the map
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([4.9013, 52.3701]),
+          zoom: 12
+        })
+      });
+      // Define the bike path
+		var format = new ol.format.GeoJSON();
+		var vectorSource = new ol.source.Vector({
+			url: './routes/route1.json',
+			format: format
+		});
+      // Add the bike path to the map
+      var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+      });
+      map.addLayer(vectorLayer);
+    </script>
+  </body>
+</html>
+
