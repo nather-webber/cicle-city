@@ -43,37 +43,56 @@
       });
       map.addLayer(vectorLayer);
 	  
-	  var container = document.getElementById('popup');
-	  var content = document.getElementById('popup-content');
-	var closer = document.getElementById('popup-closer');
+		// Add a select interaction to the map
+		var select = new ol.interaction.Select();
+		map.addInteraction(select);
 
-	var overlay = new ol.Overlay({
-	  element: container,
-	  autoPan: true,
-	  autoPanAnimation: {
-		duration: 250
-	  }
-	});
+		// Add a hover interaction to the map
+		var hover = new ol.interaction.Hover();
+		map.addInteraction(hover);
 
-	map.addOverlay(overlay);
+		// Add a Popup overlay to the map
+		var container = document.getElementById('popup');
+		var content = document.getElementById('popup-content');
+		var closer = document.getElementById('popup-closer');
 
-	map.on('click', function(evt) {
-	  var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
-		return feature;
-	  });
-	  if (feature) {
-		var geometry = feature.getGeometry();
-		var coordinate = geometry.getCoordinates();
-		content.innerHTML = feature.get('instruction');
-		overlay.setPosition(coordinate);
-	  }
-	});
+		var overlay = new ol.Overlay({
+			element: container,
+			autoPan: true,
+			autoPanAnimation: {
+				duration: 250
+			}
+		});
+		map.addOverlay(overlay);
 
-	closer.onclick = function() {
-	  overlay.setPosition(undefined);
-	  closer.blur();
-	  return false;
-	};
+		// Add a click listener to the map to show the Popup
+		map.on('click', function(e) {
+			var feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
+				return feature;
+			});
+			if (feature) {
+				var coordinates = feature.getGeometry().getCoordinates();
+				content.innerHTML = '<b>Instructions:</b> ' + feature.getProperties().instruction;
+				overlay.setPosition(coordinates);
+			}
+		});
+
+		// Add a hover listener to the map to highlight the feature
+		map.on('pointermove', function(e) {
+			if (e.dragging) {
+				return;
+			}
+			var pixel = map.getEventPixel(e.originalEvent);
+			var hit = map.hasFeatureAtPixel(pixel);
+			map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+		});
+
+		// Add a close listener to the Popup
+		closer.onclick = function() {
+			overlay.setPosition(undefined);
+			closer.blur();
+			return false;
+		};
 
 	  
 	  
