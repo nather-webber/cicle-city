@@ -4,6 +4,7 @@
     <title>OpenLayers Bike Path</title>
     <link rel="stylesheet" href="./libs/v6.3.1-dist/ol.css" type="text/css">
     <script src="./libs/v6.3.1-dist/ol.js"></script>
+	<script src="./libs/v6.3.1-dist/Overlay.js"></script>
     <style>
       .map {
         height: 500px;
@@ -19,6 +20,7 @@
 	</div>
     <script>
       // Initialize the map
+	  
       var map = new ol.Map({
         target: 'map',
         layers: [
@@ -56,7 +58,7 @@
 		var content = document.getElementById('popup-content');
 		var closer = document.getElementById('popup-closer');
 
-		var overlay = new ol.Overlay({
+		var overlay = new Overlay({
 			element: container,
 			autoPan: true,
 			autoPanAnimation: {
