@@ -14,13 +14,12 @@
   </head>
   <body>
     <div id="map" class="map"></div>
-	<div id="popup" class="ol-popup">
-	  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-	  <div id="popup-content"></div>
-	</div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
     <script>
       // Initialize the map
-	  
       var map = new ol.Map({
         target: 'map',
         layers: [
@@ -33,7 +32,6 @@
           zoom: 12
         })
       });
-      // Define the bike path
 		var format = new ol.format.GeoJSON();
 		var vectorSource = new ol.source.Vector({
 			url: './routes/route1.json',
@@ -44,61 +42,40 @@
         source: vectorSource
       });
       map.addLayer(vectorLayer);
-	  
-		// Add a select interaction to the map
-		var select = new ol.interaction.Select();
-		map.addInteraction(select);
+      
+      // Create a popup overlay
+      var popup = new ol.Overlay({
+        element: document.getElementById('popup')
+      });
+      map.addOverlay(popup);
 
-		// Add a hover interaction to the map
-		var hover = new ol.interaction.Hover();
-		map.addInteraction(hover);
+      // Add an interaction to display information about a feature when the user hovers over it
+      var pointer = new ol.interaction.Pointer({
+        handleDownEvent: function(event) {
+          var feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
+            return feature;
+          });
+          if (feature) {
+            var coordinates = feature.getGeometry().getCoordinates();
+            popup.setPosition(coordinates);
+            var properties = feature.getProperties();
+            var content = '<h2>' + properties.name + '</h2>' + '<p>' + properties.description + '</p>';
+            document.getElementById('popup-content').innerHTML = content;
+            document.getElementById('popup').style.display = 'block';
+          }
+        }
+      });
+      map.addInteraction(pointer);
 
-		// Add a Popup overlay to the map
-		var container = document.getElementById('popup');
-		var content = document.getElementById('popup-content');
-		var closer = document.getElementById('popup-closer');
-
-		var overlay = new Overlay({
-			element: container,
-			autoPan: true,
-			autoPanAnimation: {
-				duration: 250
-			}
-		});
-		map.addOverlay(overlay);
-
-		// Add a click listener to the map to show the Popup
-		map.on('click', function(e) {
-			var feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
-				return feature;
-			});
-			if (feature) {
-				var coordinates = feature.getGeometry().getCoordinates();
-				content.innerHTML = '<b>Instructions:</b> ' + feature.getProperties().instruction;
-				overlay.setPosition(coordinates);
-			}
-		});
-
-		// Add a hover listener to the map to highlight the feature
-		map.on('pointermove', function(e) {
-			if (e.dragging) {
-				return;
-			}
-			var pixel = map.getEventPixel(e.originalEvent);
-			var hit = map.hasFeatureAtPixel(pixel);
-			map.getTargetElement().style.cursor = hit ? 'pointer' : '';
-		});
-
-		// Add a close listener to the Popup
-		closer.onclick = function() {
-			overlay.setPosition(undefined);
-			closer.blur();
-			return false;
-		};
-
-	  
-	  
+      // Add a closer button to the popup
+      var closer = document.getElementById('popup-closer');
+      closer.onclick = function() {
+        document.getElementById('popup').style.display = 'none';
+        closer.blur();
+        return false;
+      };
     </script>
   </body>
+
 </html>
 
