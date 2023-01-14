@@ -12,6 +12,11 @@
     </style>
   </head>
   <body>
+	<div id="popup" class="ol-popup">
+	  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+	  <div id="popup-content"></div>
+	</div>
+
     <div id="map" class="map"></div>
     <script>
       // Initialize the map
@@ -38,6 +43,41 @@
         source: vectorSource
       });
       map.addLayer(vectorLayer);
+	  
+	  var container = document.getElementById('popup');
+	  var content = document.getElementById('popup-content');
+	var closer = document.getElementById('popup-closer');
+
+	var overlay = new ol.Overlay({
+	  element: container,
+	  autoPan: true,
+	  autoPanAnimation: {
+		duration: 250
+	  }
+	});
+
+	map.addOverlay(overlay);
+
+	map.on('click', function(evt) {
+	  var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+		return feature;
+	  });
+	  if (feature) {
+		var geometry = feature.getGeometry();
+		var coordinate = geometry.getCoordinates();
+		content.innerHTML = feature.get('instruction');
+		overlay.setPosition(coordinate);
+	  }
+	});
+
+	closer.onclick = function() {
+	  overlay.setPosition(undefined);
+	  closer.blur();
+	  return false;
+	};
+
+	  
+	  
     </script>
   </body>
 </html>
