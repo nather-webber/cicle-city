@@ -5,7 +5,11 @@ body {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   color: #000000;
+  
+  margin: 0;
+  padding: 0;
 }
+
 
 h1, h2, h3 {
   color: #333333;
@@ -19,12 +23,14 @@ a:hover {
   color: #ff0000;
 }
 
+
 header {
-  background-color: #333333;
-  color: #ffffff;
+  background-color: #f8f8f8; /* change to a lighter color */
+  color: #000000;
   text-align: center;
   padding: 20px;
 }
+
 
 header h1 {
   margin: 0;
@@ -125,4 +131,90 @@ footer p {
 .table {
   margin-bottom: 0;
 }
+
+/* Introduction Styles */
+
+.introduction {
+    padding: 20px;
+    background-color: #f8f8f8;
+    color: #000000;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.introduction h2 {
+    margin: 0;
+    color: #333333;
+    font-size: 1.5em;
+}
+
+.introduction p {
+    margin-bottom: 20px;
+    color: #333333;
+    text-align: justify;
+}
+
+.introduction .cta-btn {
+    background-color: #0000ff;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+	text-align: justify;
+}
+
+.introduction .cta-btn:hover {
+    background-color: #000080;
+}
+
+.introduction .cta-btn:active {
+    background-color: #00ffff;
+    color: #000000;
+}
+
+.introduction {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.introduction-text {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f8f8;
+    color: #000000;
+    margin-bottom: 20px;
+    margin-right: 320px; /* add this */
+}
+
+.introduction-text h2{
+    display: inline-block;
+}
+
+.introduction-image {
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.introduction-image img {
+    width: 100%;
+}
+
+.container section  /* comment */ {
+    visibility: visible;
+}
+
+.read-more {
+     color: #F9A825;
+}
+.read-more:hover {
+	color: #F9A825;
+    text-decoration: underline;
+}
+
 
