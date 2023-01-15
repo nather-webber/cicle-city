@@ -61,3 +61,19 @@
   }
 }
 
+img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  max-width: 100%; /* add this line */
+  display: block; /* add this line */
+}
+
+@media (max-width: 768px) {
+    img {
+        width: 50%; /* reduce the width of the image on small screens */
+		max-width: 50%; /* add this line */
+		display: block; /* add this line */
+    }
+}
+
