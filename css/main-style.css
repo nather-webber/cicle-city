@@ -55,14 +55,43 @@ nav ul li {
 }
 
 nav ul li a {
-  display: block;
-  padding: 10px;
-  text-decoration: none;
+	color: #000000;
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 nav ul li a:hover {
-  background-color: #dddddd;
+	color: #000000;
+	text-decoration: none;
+	cursor: pointer;
 }
+
+
+nav ul li ul {
+	height: 0;
+    overflow: hidden;
+    opacity: 0; 
+	transition: opacity 2s;
+    -webkit-transition: opacity 2s;
+}
+nav ul li ul a{
+	font-weight: normal;
+}
+
+nav ul li:hover ul {
+	
+	
+	
+    display: flex;
+	opacity:1;
+	height: auto;
+    overflow: visible;
+}
+
+
+
 
 .container {
   max-width: 800px;
@@ -177,6 +206,7 @@ footer p {
     display: flex;
     width: 100%;
     position: relative;
+	border-radius: 10px;
 }
 
 .introduction-text {
@@ -205,8 +235,9 @@ footer p {
     width: 100%;
 }
 
-.container section  /* comment */ {
+.container section {
     visibility: visible;
+	border-radius: 10px;
 }
 
 .read-more {
@@ -217,4 +248,21 @@ footer p {
     text-decoration: underline;
 }
 
+.tour-container {
+  display: flex;
+}
+
+.tour-description {
+  width: 70%;
+  
+}
+
+.tour-image {
+  width: 30%;
+  margin-left: 15px;
+}
+
+.tour-image img {
+  width: 100%;
+}
 

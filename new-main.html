@@ -6,14 +6,29 @@
         <link rel="stylesheet" type="text/css" href="./css/main-style.css">
         <link rel="stylesheet" type="text/css" href="./css/responsive.css">
         <script>
-            function showTour(tourId) {
+			function showTour(index) {
+				// Get all tour sections
+				const tourSections = document.querySelectorAll("section");
+				
+				// Hide all tour sections
+				tourSections.forEach(section => {
+					section.style.display = "none";
+				});
+				// Show the random tour section
+				tourSections[index].style.display = "block";
+				// Scroll to the random tour section
+				tourSections[index].scrollIntoView({ behavior: 'smooth' });
+			}
+		
+		
+            function showContact() {
                 // hide all of the tour sections
                 var sections = document.querySelectorAll('.container section');
                 for (var i = 0; i < sections.length; i++) {
                     sections[i].style.display = 'none';
                 }
                 // show the corresponding section
-                var tour = document.querySelector('#' + tourId);
+                var tour = document.querySelector('#' + '');
                 tour.style.display = 'block';
 				tour.scrollIntoView({ behavior: 'smooth' });
             }
@@ -48,19 +63,19 @@
 				<a href="#tours">Tours</a>
 				<ul>
                 <li>
-                    <a href="#" onclick="showTour('tour1')">Tour 1</a>
+                    <a href="#" onclick="showTour(0)">Tour 1</a>
                 </li>
                 <li>
-                    <a href="#" onclick="showTour('tour2')">Tour 2</a>
+                    <a href="#" onclick="showTour(1)">Tour 2</a>
                 </li>
                 <li>
-                    <a href="#" onclick="showTour('tour3')">Tour 3</a>
+                    <a href="#" onclick="showTour(2)">Tour 3</a>
                 </li>
                 
             </ul>
 			</li>
 			<li>
-				<a href="#" onclick="showTour('contact')">Contact Us</a>
+				<a href="#" onclick="showContact()">Contact Us</a>
 			</li>
 		  </ul>
 		</nav>
@@ -119,6 +134,9 @@
 			<section id="comments">
 				<h2>Comments</h2>
 				<!-- il form per lasciare commenti va qui -->
+			</section>
+			<section id="contacts" style="display:none;">
+				<h2>Contacts</h2>
 			</section>
 		</div>
 		<footer>

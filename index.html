@@ -1,41 +1,36 @@
 <!doctype html>
 <html>
     <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>Cycle City Amsterdam</title>
+        <meta name="description" content="Explore Amsterdam on two wheels with Cycle City Amsterdam. Our bike tours take you through the city's most picturesque neighborhoods and hidden gems. Join us and discover the beauty of Amsterdam on two wheels.">
+        <meta name="keywords" content="Amsterdam, bike tours, cycling, sightseeing, historical tour, hidden gems">
         <link rel="stylesheet" type="text/css" href="./css/main-style.css">
         <link rel="stylesheet" type="text/css" href="./css/responsive.css">
-        <script>
-            function showTour(tourId) {
-                // hide all of the tour sections
-                var sections = document.querySelectorAll('.container section');
-                for (var i = 0; i < sections.length; i++) {
-                    sections[i].style.display = 'none';
-                }
-                // show the corresponding section
-                var tour = document.querySelector('#' + tourId);
-                tour.style.display = 'block';
-				tour.scrollIntoView({ behavior: 'smooth' });
-            }
-			function showRandomTour() {
-				// Get all tour sections
-				const tourSections = document.querySelectorAll("section");
-				// Get the number of tour sections
-				const numberOfTours = tourSections.length -1;
-				// Generate a random number between 0 and the number of tours
-				const randomTourIndex = Math.floor(Math.random() * numberOfTours);
-				// Hide all tour sections
-				tourSections.forEach(section => {
-					section.style.display = "none";
-				});
-				// Show the random tour section
-				tourSections[randomTourIndex].style.display = "block";
-				// Scroll to the random tour section
-				tourSections[randomTourIndex].scrollIntoView({ behavior: 'smooth' });
+		<script>
+		window.onload = function() {
+			if (sessionStorage.getItem("showContactsOnload") === "true") {
+				sessionStorage.removeItem("showContactsOnload");
+				showContacts();
 			}
-
-
-        </script>
+				
+		
+			if (sessionStorage.getItem("showAllToursOnLoad") === "true") {
+				sessionStorage.removeItem("showAllToursOnLoad");
+				showAllTours();
+			}
+			if (sessionStorage.getItem("showTourOnload") !== null) {
+			
+				// The property exists, retrieve the value
+				var index = sessionStorage.getItem("showTourOnload");
+				sessionStorage.removeItem("showTourOnload");
+				// Use the value to call the desired function
+				showTour(index);
+			}
+		}
+</script>
+        <script type="text/javascript" src="./scripts/menu.js"></script>
     </head>
     <body>
         <header>
@@ -45,22 +40,22 @@
 		<nav>
 		  <ul>
 			<li>
-				<a href="#tours">Tours</a>
+				<a href="#tours" onclick="showAllTours()">Tours</a>
 				<ul>
                 <li>
-                    <a href="#" onclick="showTour('tour1')">Tour 1</a>
+                    <a onclick="showTour(0)">Tour 1</a>
                 </li>
                 <li>
-                    <a href="#" onclick="showTour('tour2')">Tour 2</a>
+                    <a onclick="showTour(1)">Tour 2</a>
                 </li>
                 <li>
-                    <a href="#" onclick="showTour('tour3')">Tour 3</a>
+                    <a onclick="showTour(2)">Tour 3</a>
                 </li>
                 
             </ul>
 			</li>
 			<li>
-				<a href="#" onclick="showTour('contact')">Contact Us</a>
+				<a onclick="showContacts()">Contact Us</a>
 			</li>
 		  </ul>
 		</nav>
@@ -68,7 +63,7 @@
 		
 
         <div class="container">
-			<div class="introduction">
+			<div class="introduction" id="introduction">
 				<div class="introduction-text">
 					<h2>Explore Amsterdam like never before</h2>
 					<p>Discover the beauty of Amsterdam on two wheels. Our bike tours take you through the city's most picturesque neighborhoods and hidden gems.</p>
@@ -76,53 +71,78 @@
 					<a class="cta-btn" onclick="showRandomTour()" >Start exploring</a>
 				</div>
 				<div class="introduction-image">
-					<img src="pics/cyclecity.png" alt="Cycle City">
+					<img src="./pics/cyclecity.png" alt="Cycle City welcome picture">
 				</div>
 			</div>
 
             <section id="tour1" style="display:none;">
-                <h2>Tour 1</h2>
-                <strong>Amsterdam Forest Tour:</strong> Escape the city and take a peaceful ride through the beautiful Amsterdam Forest. Along the way, stop at the Forest Museum and the Amserdamse Waterleidingduinen for a picnic or a swim. Distance: 15 km. Estimated time: 3-4 hours.
+                <div class="tour-container">
+					<div class="tour-description">
+						<h2>Tour 1</h2>
+						<strong>Amsterdam Forest Tour:</strong> Escape the city and take a peaceful ride through the beautiful Amsterdam Forest. Along the way, stop at the Forest Museum and the Amserdamse Waterleidingduinen for a picnic or a swim. Distance: 15 km. Estimated time: 3-4 hours.
                 
-                <strong>Highlights:</strong>
-                <ul>
-                    <li>Amsterdam Forest Museum</li>
-                    <li>Amsterdamse Waterleidingduinen</li>
-                </ul>
-				<a href="#" class="read-more">Explore the tour... </a>
+						<strong>Highlights:</strong>
+						<ul>
+							<li>Amsterdam Forest Museum</li>
+							<li>Amsterdamse Waterleidingduinen</li>
+						</ul>
+						<a href="./tours/tour1.html" class="read-more">Explore the tour... </a>
+					</div>
+					<div class="tour-image">
+						<img src="./pics/tour1.png" alt="Tour 1 Overview">
+					</div>
+                </div>
             </section>
+
             <section id="tour2" style="display:none;">
-                <h2>Tour 2</h2>
-                <strong>Foodie Tour of Amsterdam West:</strong> Discover the vibrant food scene in Amsterdam West on this tasty bike tour. We'll visit a variety of local markets, food halls, and specialty food shops. Distance: 12 km. Estimated time: 3 hours.
-               
-                <strong>Highlights:</strong>
-                <ul>
-                    <li>Local markets</li>
-                    <li>Food halls</li>
-                    <li>Specialty food shops</li>
-                </ul>
-				<a href="#" class="read-more">Explore the tour... </a>
+				<div class="tour-container">
+					<div class="tour-description">
+						<h2>Tour 2</h2>
+						<strong>Foodie Tour of Amsterdam West:</strong> Discover the vibrant food scene in Amsterdam West on this tasty bike tour. We'll visit a variety of local markets, food halls, and specialty food shops. Distance: 12 km. Estimated time: 3 hours.
+						
+						<strong>Highlights:</strong>
+						<ul>
+							<li>Local markets</li>
+							<li>Food halls</li>
+							<li>Specialty food shops</li>
+						</ul>
+						<a href="#" class="read-more">Explore the tour... </a>
+					</div>
+					<div class="tour-image">
+						<img src="./pics/tour2.png" alt="Tour 2 Overview">
+					</div>
+                </div>
+                
             </section>
             <section id="tour3" style="display:none;">
-				<h2>Tour 3</h2>
-				<!-- il contenuto del tour 3 va qui -->
-				<strong>Historical Tour of Amsterdam East:</strong> Explore the rich history and culture of Amsterdam East on this bike tour. We'll visit landmarks such as the Oosterpark and the Tropenmuseum, and learn about the city's history and diversity. Distance: 10 km. Estimated time: 2-3 hours.
+				<div class="tour-container">
+					<div class="tour-description">
+						<h2>Tour 3</h2>
+						<strong>Historical Tour of Amsterdam East:</strong> Explore the rich history and culture of Amsterdam East on this bike tour. We'll visit landmarks such as the Oosterpark and the Tropenmuseum, and learn about the city's history and diversity. Distance: 10 km. Estimated time: 2-3 hours.
+						
+						<!-- Highlights -->
+						<strong>Highlights:</strong>
+						<ul>
+							<li>Oosterpark</li>
+							<li>Tropenmuseum</li>
+						</ul>
+						<a href="#" class="read-more">Explore the tour... </a>
+					</div>
+					<div class="tour-image">
+						<img src="./pics/tour3.png" alt="Tour 3 Overview">
+					</div>
+                </div>
 				
-				<!-- Highlights -->
-				<strong>Highlights:</strong>
-				<ul>
-					<li>Oosterpark</li>
-					<li>Tropenmuseum</li>
-				</ul>
-				<a href="#" class="read-more">Explore the tour... </a>
 			</section>
-			<section id="comments">
-				<h2>Comments</h2>
-				<!-- il form per lasciare commenti va qui -->
+			
+			<section id="contacts" style="display:none;">
+				<h2>Contacts</h2>
 			</section>
+			
 		</div>
+		
 		<footer>
-			<p>Copyright 2023 Cycle City Amsterdam</p>
+			<p>Copyright 2023 @ Cycle City Amsterdam</p>
 		</footer>
     </body>
 </html>
